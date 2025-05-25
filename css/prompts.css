@@ -29,3 +29,8 @@
 .prompts-text strong {
   font-size: 1.4em;
 }
+
+#prompts-generate {
+  text-decoration: underline;
+  color: blue;
+}

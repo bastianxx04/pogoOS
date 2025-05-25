@@ -1,0 +1,27 @@
+.irc-content {
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  background-color: #ebbcbc;
+  padding: 1em;
+}
+
+#irc-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0.5em;
+  background-color: #d9b5b5;
+  border: 2px solid #d88c8c;
+  border-radius: 4px;
+  margin-bottom: 0.5em;
+}
+
+#irc-input {
+  flex-shrink: 0;
+  padding: 0.5em;
+  font-size: 1em;
+  border: 1px solid #353535;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}

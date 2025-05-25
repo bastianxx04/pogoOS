@@ -47,7 +47,7 @@ let paletteCol = [
 
 // This is the code for the prompt tools app. It must be loaded after jquery and jquery ui because it depends on both of them.
 $(document).ready(function () {
-  $("#prompts #prompts-generate").click(function () {
+  $("#prompts").on("click", "#prompts-generate", function () {
     var cat = pickPrompt(categories);
     var style = pickPrompt(styles);
     var music = pickPrompt(soundtracks);

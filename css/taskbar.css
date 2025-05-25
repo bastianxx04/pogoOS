@@ -21,6 +21,7 @@
 #rightTaskbar img {
   vertical-align: middle;
 }
+
 #toggleStart {
   text-decoration: none;
   font-weight: bold;
@@ -39,13 +40,30 @@
   border-left-width: 10px;
   border-left-style: solid;
   border-left-color: transparent;
+  border: 2px solid #97133e;
+  border-radius: 4px;
+  box-shadow: inset 1px 1px 0px 0px #f6ab6c, inset -1px -1px 0px 0px #4a0820,
+    2px 2px 4px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  position: relative;
 }
+
 #toggleStart:hover {
   background-image: url("../img/pogoStartHover.png");
   background-repeat: no-repeat;
   background-color: #4f4e83;
   color: #9f66ca;
+  border: 2px solid #f6ab6c;
+  box-shadow: inset 1px 1px 0px 0px #ffffff, inset -1px -1px 0px 0px #2a1540,
+    2px 2px 6px rgba(0, 0, 0, 0.4), 0 0 8px rgba(246, 171, 108, 0.3);
 }
+
+#toggleStart:active {
+  box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.4),
+    inset -1px -1px 0px 0px #f6ab6c;
+  transform: translateY(1px);
+}
+
 .startMenuLinks.ui-widget.ui-widget-content,
 .startMenuLinks.ui-widget-content ul {
   background-color: #4f4e83;
@@ -94,13 +112,17 @@
 }
 
 #minimizedApps {
-  margin: 0 0 0 120px;
+  margin: 0 0 0 135px;
   border: 0px solid #000;
   height: 100%;
   padding: 0px;
-  width: calc(100% - 400px);
-  margin-top: -38px;
+  width: calc(100% - 240px);
+  margin-top: -46px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
 }
+
 #minimizedApps li {
   width: 150px;
   bottom: 10px;
@@ -127,3 +149,24 @@
 #minimizedApps a:visited {
   color: #5b132a;
 }
+/* 
+#taskBar {
+  cursor: url("../img/cursor_default.png") 2 2, default !important;
+}
+#rightTaskbar {
+  cursor: url("../img/cursor_default.png") 2 2, default !important;
+}
+
+#minimizedApps {
+  cursor: url("../img/cursor_default.png") 2 2, default !important;
+}
+#minimizedApps li {
+  cursor: url("../img/cursor_pointer.png") 2 2, pointer !important;
+}
+#minimizedApps a {
+  cursor: url("../img/cursor_pointer.png") 2 2, pointer !important;
+}
+
+#toggleStart {
+  cursor: url("../img/cursor_pointer.png") 2 2, pointer !important;
+} */

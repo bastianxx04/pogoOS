@@ -1,0 +1,58 @@
+/* Ensures explorer uses OS theme */
+.explorer-content {
+  display: flex;
+  height: 100%;
+  background-color: #ebbcbc; /* matches other windows */
+  padding: 1em;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.folder-list {
+  width: 150px;
+  padding-right: 1em;
+  border-right: 1px solid #a02a50;
+}
+
+.folder {
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 1em;
+}
+
+.folder img {
+  display: block;
+  margin: 0 auto;
+}
+
+.file-preview {
+  flex: 1;
+  padding-left: 1em;
+  display: none; /* toggle on folder click */
+}
+
+.explorerThumbnail {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  margin: 5px;
+  border: 1px solid #353535;
+  background-color: white;
+  padding: 2px;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+/* Photo Viewer window content */
+.photo-viewer {
+  background-color: #ebbcbc;
+  padding: 1em;
+  text-align: center;
+}
+
+.folder.selected {
+  background-color: #d88c8c;
+  outline: 2px solid #a02a50;
+  outline-offset: -2px;
+  border-radius: 4px;
+}

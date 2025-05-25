@@ -1,10 +1,10 @@
 /* ==== Cursor styles ==== */
 * {
-  cursor: url("../img/cursor_default.png") 2 2, default;
+  cursor: url("../img/cursor_default.png") 2 2, default !important;
 }
 a {
-  cursor: url("../img/cursor_pointer.png") 2 2, pointer;
+  cursor: url("../img/cursor_pointer.png") 2 2, pointer !important;
 }
 .target-element {
-  cursor: url("../img/cursor_crosshair.png") 18 18, crosshair;
+  cursor: url("../img/cursor_crosshair.png") 18 18, crosshair !important;
 }

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>PogoOS - Break the Ghost in the Machine</title>
+  <title>PogoOS - Smile more!</title>
   <link rel="icon" type="image/x-icon" href="/img/favicon.ico">
 
   <meta charset="utf-8" />
@@ -20,6 +20,9 @@
   <link type="text/css" rel="stylesheet" href="css/calculator.css">
   <link type="text/css" rel="stylesheet" href="css/main.css">
   <link type="text/css" rel="stylesheet" href="css/prompts.css">
+  <link type="text/css" rel="stylesheet" href="css/photo-viewer.css">
+  <link type="text/css" rel="stylesheet" href="css/explorer.css">
+  <link type="text/css" rel="stylesheet" href="css/irc.css">
 
   <script src="script/jquery/jquery-3.7.1.min.js"></script>
   <script src="script/jquery/jquery-ui-1.14.0.custom/jquery-ui.js"></script>
@@ -41,7 +44,6 @@
         "/" + (month < 10 ? '0' : '') + month +
         "/" + d.getFullYear();
 
-
       function getCurrentDate() {
         return dateOutput;
       }
@@ -60,17 +62,17 @@
       });
 
       // Closing windows
-      $(".close").click(function () {
+      $("#desktop").on("click", ".close", function () {
         $(this).parents(".window").hide();
       });
 
       // Minimizing windows
-      $(".minimize").click(function () {
+      $("#desktop").on("click", ".minimize", function () {
         var windowTitle = $(this).parent().children(".windowTitle");
         var windowID = $(this).parents(".window").attr('id');
 
         // Add the element in the taskbar
-        $("#minimizedApps").append("<li><a onclick=reviveWindow('" + windowID + "') class='" + windowID + "'>" + windowTitle.text() + "</a></li>");
+        $("#minimizedApps").append("<li><a onclick='reviveWindow(\"" + windowID + "\")' class='" + windowID + "'>" + windowTitle.text() + "</a></li>");
 
         $(this).parents(".window").hide();
       });
@@ -86,15 +88,26 @@
 
       $("#desktop").mouseup(function () {
         $("#startMenu").hide()
-      })
+      });
 
-
+      // Make dynamically loaded windows draggable and focusable
+      $("#desktop").on("mousedown", ".draggable", function () {
+        // Make sure newly loaded windows are draggable
+        if (!$(this).hasClass('ui-draggable')) {
+          $(this).draggable({ scroll: false });
+        }
+        // Handle focus
+        $(this).css({ "z-index": zindex + 1 });
+        zindex++;
+      });
     });
   </script>
 
   <!-- Other scripts go here when needed -->
   <script src="script/calc.js"></script>
   <script src="script/prompts.js"></script>
+  <script src="script/explorer.js"></script>
+  <script src="script/irc.js"></script>
 
   <!-- Black Magic zone -->
   <script src="script/calendar.min.js"></script> <!-- https://github.com/benhall14/jquery-calendar -->
@@ -105,21 +118,22 @@
 
 
   <div id="desktop">
-    <h1>Hello, world!</h1>
-    <p>look at this cool ass site :3</p>
+    <div id="greeting"></div>
+    <script>
+      $(function () {
+        $("#greeting").load("html/greeting.html");
+      });
+    </script>
+
+
     <!------  Desktop icons go here ------->
+
     <div id="desktopIcons">
-      <div>
-        <p><a onclick="showWindow('welcomeTXT')"><img src="img/icons/icon_text_2x.png" alt="Welcome.txt"><br>
-            <span class="iconLabel">Welcome.txt</a></span></p>
-        <p><a onclick="showWindow('calculator')"><img src="img/icons/icon_calculator_2x.png" alt="Calculator"><br>
-            <span class="iconLabel">Calculator</span></a></p>
-      </div>
-      <div>
-        <p><a id="prompts-link" onclick="showWindow('prompts')"><img src="img/icons/icon_prompts_2x.png"
-              alt="Daily Prompts"><br>
-            <span class="iconLabel">Daily Prompts</span></a></p>
-      </div>
+      <script>
+        $(function () {
+          $("#desktopIcons").load("html/desktopIcons.html");
+        });
+      </script>
     </div>
 
     <!------  Programs go here ------->
@@ -127,140 +141,53 @@
 
     <!-- Welcome -->
     <div class="window draggable" id="welcomeTXT" style="left: 60px; top: 100px;">
-      <div class="menuBar">
-        <span id="introWindow" class="windowTitle">Welcome.txt</span>
-        <a class="minimize">_</a> | <a class="close">X</a>
-      </div>
-
-      <div class="content">
-        <h1>Welcome to PogoOS</h1>
-
-        <p><img src="img/pogo_welcome.png"
-            alt="My first digital drawing of Pogo, color palette inspired by MonoKobold over on Twitter" class="inline">
-          PogoOS is what you're looking at here! I'm just here to learn html, css, jquery and all that jazz.
-          VERY heavily inspired by <a href="https://www.thefrugalgamer.net/programming/FrugalOS/">FrugalOS</a>, so check
-          that out if you find the time :)</p>
-        <p>
-          I'm looking to expand this with a bunch of new features, move the site to my personal domain, and much more.
-          If you have any ideas for stuff to add, don't hesitate to shoot me an email.
-        </p>
-        <p>
-          Check out the github repo down below for all the scuffed source code.
-        </p>
-
-        <h2>Links:</h2>
-        <ul>
-          <li><a href="https://bastian.nu">
-              <img src="img/icons/icon_home_16.png" alt="icon">Bastian.nu</a></li>
-          <li><a href="mailto:contact@bastian.nu">
-              <img src="img/icons/icon_email_16.png" alt="icon">Email me with feedback</a></li>
-          <li><a href="https://github.com/bastianxx04/pogoOS">
-              <img src="img/icons/icon_github_16.png" alt="icon">Github Repository</a></li>
-        </ul>
-      </div>
+      <script>
+        $(function () {
+          $("#welcomeTXT").load("html/programs/welcomeTXT.html");
+        });
+      </script>
     </div>
 
     <!-- Prompts -->
     <div class="window draggable off" id="prompts">
-      <div class="menuBar">
-        <span id="prompts-span" class="windowTitle">Daily Prompts</span>
-        <a class="minimize">_</a> | <a class="close">X</a>
-      </div>
-
-      <div class="content">
-        <h2>Here's your daily inspiration</h2>
-        <a id="prompts-generate">Click here to generate</a>
-
-        <div id="prompts-palette">
-          <p><strong>Today's Palette</strong></p>
-          <ul>
-            <li id="prompts1" style="background-color: #fff;"><span>#</span></li>
-            <li id="prompts2" style="background-color: #fff;"><span>#</span></li>
-            <li id="prompts3" style="background-color: #fff;"><span>#</span></li>
-            <li id="prompts4" style="background-color: #fff;"><span>#</span></li>
-            <li id="prompts5" style="background-color: #fff;"><span>#</span></li>
-          </ul>
-          <span id="prompts-colors-text"></span>
-        </div>
-        <hr>
-
-        <div class="prompts-text" id="prompts-style">
-          <strong>Style</strong><br>
-          <span class="result"></span>
-        </div>
-
-        <div class="prompts-text" id="prompts-category">
-          <strong>Category</strong><br>
-          <span class="result"></span>
-        </div>
-
-        <div class="prompts-text" id="prompts-words">
-          <strong>Phrase</strong><br>
-          <span class="result"></span>
-        </div>
-
-        <div class="prompts-text" id="prompts-soundtrack">
-          <strong>Soundtrack</strong><br>
-          <span class="result"></span>
-        </div>
-        <hr>
-        <p>Go forth and create something cool!</p>
-      </div>
+      <script>
+        $(function () {
+          $("#prompts").load("html/programs/prompts.html");
+        });
+      </script>
     </div>
 
     <!-- Caluclator -->
     <div class="window draggable off" id="calculator">
-      <div class="menuBar">
-        <span id="calculator-span" class="windowTitle">Calculator</span>
-        <a class="minimize">_</a> | <a class="close">X</a>
-      </div>
-
-      <div class="content">
-        <div class="progMenu">
-          <ul class="menu">
-            <li><a href="#">File</a>
-              <ul>
-                <li><a id="calc-show-mem">Memory</a></li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-
-        <span id="calc_result">0</span><br>
-        <table>
-          <tr>
-            <td><input type="button" value="1"></td>
-            <td><input type="button" value="2"></td>
-            <td><input type="button" value="3"></td>
-            <td><input type="button" value="+"></td>
-          </tr>
-          <tr>
-            <td><input type="button" value="4"></td>
-            <td><input type="button" value="5"></td>
-            <td><input type="button" value="6"></td>
-            <td><input type="button" value="-"></td>
-          </tr>
-          <tr>
-            <td><input type="button" value="7"></td>
-            <td><input type="button" value="8"></td>
-            <td><input type="button" value="9"></td>
-            <td><input type="button" value="x"></td>
-          </tr>
-          <tr>
-            <td><input type="button" value="0"></td>
-            <td><input type="button" value="."></td>
-            <td><input type="button" value="C"></td>
-            <td><input type="submit" value="="></td>
-          </tr>
-        </table>
-
-        <div id="calc-memory" class="off">
-          <h2>Memory</h2>
-          <a href="" class="clear-clear">(clear)</a><br>
-          <span id="calc-mem-display"></span>
-        </div>
-      </div>
+      <script>
+        $(function () {
+          $("#calculator").load("html/programs/calculator.html");
+        });
+      </script>
     </div>
+
+    <!-- Explorer -->
+    <div class="window draggable off" id="explorer">
+      <script>
+        $(function () {
+          $("#explorer").load("html/programs/explorer.html");
+        });
+      </script>
+    </div>
+
+    <div class="window draggable off" id="photoViewer">
+      <!-- Loaded dynamically -->
+    </div>
+
+    <!-- IRC -->
+    <div class="window draggable off" id="irc">
+      <script>
+        $(function () {
+          $("#irc").load("html/programs/irc.html");
+        });
+      </script>
+    </div>
+
 
     <!-- Next cool app! -->
     <!-- Not made yet :( -->
@@ -279,6 +206,13 @@
     <li>
       <div><img src="img/icons/icon_prompts_1x.png" alt="Daily Prompts"> <a id="prompts-link"
           onclick="showWindow('prompts')">Daily Prompts</a></div>
+    </li>
+    <li>
+      <div><img src="img/icons/icon_folder_1x.png" alt="Explorer"> <a href="#"
+          onclick="showWindow('explorer')">Explorer</a></div>
+    </li>
+    <li>
+      <div><img src="img/icons/irc_client_1x.png" alt="IRC"> <a href="#" onclick="showWindow('irc')">IRC</a></div>
     </li>
   </ul>
 
@@ -301,7 +235,6 @@
 
   <!-- Helper functions -->
   <script>
-
     function rand(min, max) {
       return Math.random() * (max - min) + min
     }
